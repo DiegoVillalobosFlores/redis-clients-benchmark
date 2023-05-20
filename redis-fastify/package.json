@@ -1,0 +1,17 @@
+{
+  "name": "redis-fastify",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fastify": "^4.17.0",
+    "redis": "^4.6.6"
+  }
+}
