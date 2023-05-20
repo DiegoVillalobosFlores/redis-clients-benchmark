@@ -9,8 +9,7 @@
     "bun-types": "latest"
   },
   "dependencies": {
-    "@stricjs/core": "^1.0.6",
-    "@stricjs/router": "^2.0.6-alpha.6",
-    "redis": "^4.6.6"
+    "@stricjs/core": "1.0.6",
+    "redis": "4.6.6"
   }
 }
