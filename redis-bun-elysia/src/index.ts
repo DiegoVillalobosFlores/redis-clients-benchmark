@@ -1,0 +1,23 @@
+import { Elysia } from 'elysia'
+import { createClient } from 'redis';
+
+const client = createClient();
+
+client.on('error', err => console.log('Redis Client Error', err));
+
+await client.connect();
+
+await client.set('key', 'value');
+
+const app = new Elysia()
+    .get('/', async () => {
+        const start = new Date();
+        const value = await client.xRange('OPTIONS:test:STREAM', '-', '+');
+        const endDate = new Date()
+        const end = endDate.getTime() - start.getTime()
+        console.log(end)
+        return {value, end, start, endDate}
+    })
+    .listen(3001)
+
+console.log(`🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`)

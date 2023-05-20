@@ -1,0 +1,14 @@
+{
+  "name": "redis-bun",
+  "version": "0.0.59",
+  "module": "src/index.js",
+  "scripts": {
+    "dev": "bun run src/index.js"
+  },
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "dependencies": {
+    "redis": "^4.6.6"
+  }
+}

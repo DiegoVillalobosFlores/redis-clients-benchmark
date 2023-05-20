@@ -1,0 +1,15 @@
+{
+  "name": "redis-bun-hono",
+  "version": "0.0.59",
+  "module": "src/index.js",
+  "scripts": {
+    "start": "bun run src/index.js"
+  },
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "dependencies": {
+    "hono": "^3.2.1",
+    "redis": "^4.6.6"
+  }
+}
