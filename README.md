@@ -18,15 +18,31 @@ instance.
 ### Packages
 | package 	| version 	|
 |---------	|---------	|
-| node    	| 20.1    	|
-| bun     	| 0.6.2   	|
-| redis   	| 4.6.6   	|
-| ioredis 	| 5.3.2   	|
+| [node](https://nodejs.org/en)    	| 20.1    	|
+| [bun](https://bun.sh/)     	| 0.6.2   	|
+| [redis](https://github.com/redis/node-redis)   	| 4.6.6   	|
+| [ioredis](https://github.com/luin/ioredis) 	| 5.3.2   	|
 | [Elysia](https://elysiajs.com/) 	| 0.5.2   	|
 | [Hono](https://github.com/honojs/hono)   	| 3.2.1   	|
 | [Stric](https://github.com/bunsvr)   	| 1.0.6   	|
 | [Fastify](https://www.fastify.io/) 	| 4.17.0  	|
 | [Next](https://nextjs.org/)    	| 13.4.3  	|
+
+## Methodology
+
+The results were obtained by running [oha](https://github.com/hatoo/oha) with the default settings of 200 requests,
+
+```shell
+oha http://localhost:3001
+oha http://localhost:3000/pages/dynamic
+oha http://localhost:3000/pages/static
+oha http://localhost:3000/routes/redis/dynamic
+oha http://localhost:3000/routes/redis/static
+oha http://localhost:3000/routes/ioredis/dynamic
+oha http://localhost:3000/routes/ioredis/static
+```
+
+The tests were run 3 times to ensure consistency and the **third** run was taken for the data.
 
 ## Results:
 
@@ -54,3 +70,19 @@ All these results were run in an Ubuntu 22 WSL 2 instance in some dude's laptop 
 ![Server Latency](./screenshots/server-latency.png)
 
 ![Next Latency](./screenshots/next-latency.png)
+
+## Conclusion
+
+The results here shouldn't be taken as they are given that the system configuration will be different every time, a faster
+CPU and RAM will produce better results, therefore, the **delta** between each package and the delta between the latency
+distribution are the important results.
+
+With that in mind, **bun** was always faster than node with fastify and the most performant web framework for bun was **Elysia**
+
+Ioredis was much faster than node-redis in every situation, with ioredis + elysia being able to match the included Next
+server returning a `static` route which means that the request was made at build time and all the subsequent request would
+get the same result.
+
+### In short
+
+For the most performance use Elysia + ioredis
